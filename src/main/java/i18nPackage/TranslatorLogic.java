@@ -1,12 +1,14 @@
 package i18nPackage;
 
 import java.util.Locale;
+import java.util.TreeMap;
 
 import org.springframework.context.MessageSource;
 
 
 public class TranslatorLogic {
 	
+	private TranslationMap translationMap;
 	private MessageSource messageSource;
 	private String localeString;
 	private Locale locale;
@@ -14,9 +16,10 @@ public class TranslatorLogic {
 	private String phrase;
 	private String translation;
 	
-	public TranslatorLogic(MessageSource messageSource, String localeString, String phrase) {
+	public TranslatorLogic(MessageSource messageSource, TranslationMap translationMap, String localeString, String phrase) {
 		
 		this.messageSource = messageSource;
+		this.translationMap = translationMap;
 		this.localeString = localeString;
 		this.phrase = phrase;
 		
@@ -60,7 +63,13 @@ public class TranslatorLogic {
 		try {
 			translation = messageSource.getMessage(phrase, null, locale);
 		} catch (Exception e) {
+
+			TreeMap<String, String> language = translationMap.getLanguage(locale.getLanguage());
 			translation = null;
+			
+			if (language != null) {
+				translation = language.get(phrase);
+			}
 		}
 		
 		return makeJSON();

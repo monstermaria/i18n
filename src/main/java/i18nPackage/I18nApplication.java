@@ -26,5 +26,10 @@ public class I18nApplication {
 		// default locale is sv_SE on my computer, this gives swedish as the default translation
 		messageSource.setDefaultLocale(Locale.ENGLISH);
 		return messageSource;
-	}	
+	}
+	
+	@Bean
+	public TranslationMap translationMap() {
+		return new TranslationMap();
+	}
 }
