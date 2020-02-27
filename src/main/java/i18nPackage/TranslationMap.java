@@ -37,7 +37,7 @@ public class TranslationMap {
 		json += "\"language\": \"" + language + "\", ";
 		json += "\"phrase\": \"" + code + "\", ";
 		json += "\"translation\": \"" + translation + "\", ";
-		json += "\"translationAdded\": \"" + true + "\", ";
+		json += "\"translationAdded\": \"" + true + "\" ";
 		json += "}";
 		
 		return json;
